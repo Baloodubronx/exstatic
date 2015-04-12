@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  each post in posts
+    p
+      a(href="posts/#{post._id}")
+        | #{post.title}

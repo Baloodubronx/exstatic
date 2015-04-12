@@ -5,8 +5,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var debug = require('debug')('exstatic:server');
+
 var routes = require('./routes/index');
-//var users = require('./routes/users');
+var posts = require('./routes/posts');
 
 var app = express();
 
@@ -23,7 +24,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-//app.use('/users', users);
+app.use('/posts', posts);
+
+// MONGODB
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/exstatic');
 
 var http = require('http');
 app.set('port', 3000);

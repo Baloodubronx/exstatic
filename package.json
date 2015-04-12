@@ -22,6 +22,21 @@
     "debug": "^2.1.3",
     "express": "^4.12.3",
     "jade": "^1.9.2",
-    "morgan": "^1.5.2"
+    "marked": "^0.3.3",
+    "morgan": "^1.5.2",
+    "to-markdown": "^1.0.0-rc.4"
+  },
+
+  "jshintConfig": {
+    "latedef": "nofunc",
+    "strict": false,
+    "node": true,
+    "undef": true,
+    "unused": true,
+    "globals": {
+      "angular": false,
+      "jQuery": false,
+      "$": false
+    }
   }
 }

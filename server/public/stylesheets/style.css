@@ -1,8 +1,23 @@
 body {
-  padding: 50px;
+  padding: 0px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+.editzone {
+  width : 50%;
+  float : left;
+}
+
+.editzone textarea {
+  width : 90%;
+  height : 300px;
+}
+
+.resultzone {
+  width: 50%;
+  float : left;
 }

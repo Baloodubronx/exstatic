@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  .editzone
+    form(action="tomd")  
+      textarea.textarea#textarea(name='thestr')
+      button(type="submit")
+        | save
+
+      
+  .resultzone#resultzone
+    pre
+      | #{text}
