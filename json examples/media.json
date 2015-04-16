@@ -1,0 +1,100 @@
+{
+  "ID": 12685,
+  "title": "mix-electrique-ademe",
+  "status": "inherit",
+  "type": "attachment",
+  "author": {
+    "ID": 2,
+    "username": "matt",
+    "name": "matt",
+    "first_name": "Matthieu",
+    "last_name": "Combe",
+    "nickname": "matt",
+    "slug": "matt",
+    "URL": "",
+    "avatar": "http://1.gravatar.com/avatar/17870d138ca629a7364339e560f08ebc?s=96",
+    "description": "",
+    "registered": "2012-02-17T22:18:14+00:00",
+    "meta": {
+      "links": {
+        "self": "http://www.natura-sciences.com/wp-json/users/2",
+        "archives": "http://www.natura-sciences.com/wp-json/users/2/posts"
+      }
+    }
+  },
+  "content": "<p class=\"attachment\"><a href='http://www.natura-sciences.com/wordpress/wp-content/uploads/2015/04/mix-electrique-ademe.jpg' rel=\"lightbox[12685]\"><img width=\"300\" height=\"190\" src=\"http://www.natura-sciences.com/wordpress/wp-content/uploads/2015/04/mix-electrique-ademe-300x190.jpg\" class=\"attachment-medium\" alt=\"Le potentiel d&#039;\u00e9nergies renouvelables en France permettrait de produire jusqu&#039;\u00e0 3 fois la consommation de la France. PHOTO// Natura-sciences\" /></a></p>\n<p>Le potentiel d&rsquo;\u00e9nergies renouvelables en France permettrait de produire jusqu&rsquo;\u00e0 3 fois la consommation de la France. PHOTO// Natura-sciences</p>\n",
+  "link": "http://www.natura-sciences.com/energie/100-enr-mix-electrique-2050-ademe853.html/attachment/mix-electrique-ademe",
+  "date": "2015-04-14T10:49:14",
+  "modified": "2015-04-14T10:50:26",
+  "format": "standard",
+  "slug": "mix-electrique-ademe",
+  "guid": "http://www.natura-sciences.com/wordpress/wp-content/uploads/2015/04/mix-electrique-ademe.jpg",
+  "excerpt": "<p>Le potentiel d&rsquo;\u00e9nergies renouvelables en France permettrait de produire jusqu&rsquo;\u00e0 3 fois la consommation de la France. PHOTO// Natura-sciences</p>\n",
+  "menu_order": 0,
+  "comment_status": "open",
+  "ping_status": "closed",
+  "sticky": false,
+  "date_tz": "Europe/Paris",
+  "date_gmt": "2015-04-14T08:49:14",
+  "modified_tz": "Europe/Paris",
+  "modified_gmt": "2015-04-14T08:50:26",
+  "password": "",
+  "meta": {
+    "links": {
+      "self": "http://www.natura-sciences.com/wp-json/media/12685",
+      "author": "http://www.natura-sciences.com/wp-json/users/2",
+      "collection": "http://www.natura-sciences.com/wp-json/media",
+      "replies": "http://www.natura-sciences.com/wp-json/media/12685/comments",
+      "version-history": "http://www.natura-sciences.com/wp-json/media/12685/revisions",
+      "up": "http://www.natura-sciences.com/wp-json/media/12684"
+    }
+  },
+  "terms": [],
+  "source": "http://www.natura-sciences.com/wordpress/wp-content/uploads/2015/04/mix-electrique-ademe.jpg",
+  "is_image": true,
+  "attachment_meta": {
+    "width": 909,
+    "height": 576,
+    "file": "2015/04/mix-electrique-ademe.jpg",
+    "sizes": {
+      "thumbnail": {
+        "file": "mix-electrique-ademe-150x100.jpg",
+        "width": 150,
+        "height": 100,
+        "mime-type": "image/jpeg",
+        "wp_smushit": "ERROR: posting to Smush.it",
+        "url": "http://www.natura-sciences.com/wordpress/wp-content/uploads/2015/04/mix-electrique-ademe-150x100.jpg"
+      },
+      "medium": {
+        "file": "mix-electrique-ademe-300x190.jpg",
+        "width": 300,
+        "height": 190,
+        "mime-type": "image/jpeg",
+        "wp_smushit": "ERROR: posting to Smush.it",
+        "url": "http://www.natura-sciences.com/wordpress/wp-content/uploads/2015/04/mix-electrique-ademe-300x190.jpg"
+      },
+      "post-thumbnail": {
+        "file": "mix-electrique-ademe-600x400.jpg",
+        "width": 600,
+        "height": 400,
+        "mime-type": "image/jpeg",
+        "wp_smushit": "ERROR: posting to Smush.it",
+        "url": "http://www.natura-sciences.com/wordpress/wp-content/uploads/2015/04/mix-electrique-ademe-600x400.jpg"
+      }
+    },
+    "image_meta": {
+      "aperture": 0,
+      "credit": "",
+      "camera": "",
+      "caption": "",
+      "created_timestamp": 0,
+      "copyright": "",
+      "focal_length": 0,
+      "iso": 0,
+      "shutter_speed": 0,
+      "title": "",
+      "orientation": 0
+    },
+    "wp_smushit": "ERROR: posting to Smush.it"
+  }
+}

@@ -8,6 +8,7 @@ var debug = require('debug')('exstatic:server');
 
 var routes = require('./routes/index');
 var posts = require('./routes/posts');
+var importer = require('./routes/importer');
 
 var app = express();
 
@@ -21,10 +22,11 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(express.static(path.join(__dirname, '../public')));
+app.use(require('connect-livereload')());
 app.use('/', routes);
 app.use('/posts', posts);
+app.use('/importer', importer);
 
 // MONGODB
 var mongoose = require('mongoose');
@@ -35,7 +37,9 @@ app.set('port', 3000);
 
 var server = http.createServer(app);
 
-server.listen(3000);
+server.listen(3000, function(){
+  console.log('Express server listening on 3000, in dev mode');
+});
 server.on('error', onError);
 server.on('listening', onListening);
 

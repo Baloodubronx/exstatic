@@ -6,7 +6,8 @@ var toMarkdown = require('to-markdown');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Exstatic' });
+  var post = {title:'title', slug:'slug', content:'content'};
+  res.render('index', { post: post });
 });
 
 
@@ -29,5 +30,6 @@ router.get('/generate', function(req, res, next) {
   });
   res.redirect('/');
 });
+
 
 module.exports = router;

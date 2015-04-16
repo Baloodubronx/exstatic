@@ -1,4 +1,9 @@
 var isTyping = false;
+var myCodeMirror = {}
+document.addEventListener("DOMContentLoaded", function(event) {
+  myCodeMirror = CodeMirror.fromTextArea(document.getElementById('textarea'));
+});
+
 
 function markIt() {
   if (!isTyping) {

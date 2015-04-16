@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  | pouet
+  form(action="/importer/this")
+    input(name="theurl", value="http://www.natura-sciences.com/wp-json/posts?page=1")
+      
+    button(type='submit')
+      | IMPORT
+  each post in json
+    p
+      | #{post.ID}
+    p
+      | #{post.title}
+    p
+      | #{post.content}
