@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  each post, index in posts
+    p
+      a(href="/post/#{post.slug}")
+        | #{index} : #{post.title}

@@ -1,0 +1,45 @@
+body {
+  padding: 0px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.editzone {
+  width : 50%;
+  float : left;
+}
+
+.editzone  {
+  width : 80%;
+  height : 300px;
+}
+
+.resultzone {
+  width: 50%;
+  float : left;
+  height: 100%;
+}
+
+.CodeMirror-code {
+  font-size: 16px;
+  font-family: monospace;
+}
+
+.editzone .cm-header {
+  color : #111;
+}
+
+.cm-header-3 {
+  font-size: 18px;
+}
+
+.cm-header-2 {
+  font-size: 20px;
+}
+
+.cm-header-1 {
+  font-size: 22px;
+}

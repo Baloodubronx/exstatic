@@ -11,5 +11,18 @@
   "undef": true,
   "smarttabs": true,
   "asi": true,
-  "debug": true
+  "debug": true,
+  "latedef":false,
+  "globals": {
+      "angular": false,
+      "dummy": false,
+      "jQuery": false,
+      "$": false,
+      "CodeMirror": false,
+      "ArticleModalCtrl": false,
+      "document": false,
+      "postID": false,
+      "tags":false,
+      "location": false
+    }
 }

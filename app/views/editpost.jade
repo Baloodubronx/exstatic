@@ -1,0 +1,56 @@
+extends layout
+
+block content
+  .sidebar
+    .sidebar-content
+      div#tagzone
+      input#newtag(placeholder='type a tag')
+      p
+        a(href="/generate")
+          | generate file
+      if post._id
+        p
+          a(href="/preview/#{post._id}", target = "_blank")
+            | preview
+      p
+        a#savebutton(href="#")
+          | save post
+      p
+        a#makeslug(href="#")
+          | make slug
+          
+      p
+        |  
+      if post.date
+        p
+          | Created #{post.realdate}
+        p
+          | Modified #{post.realmodifieddate}
+        
+        
+  .editzone
+    .infozone
+      input#posttitleinput(name='title', value='#{post.title}')
+      input#postslug(name='slug', value='#{post.slug}')
+      | .html
+      
+    .editzone-content
+      textarea.textarea#textarea(name='content')
+        | #{post.content}
+      button(type="submit")
+        | save
+
+
+  
+  if post._id
+    script(type='text/javascript').
+      var postID = '#{post._id}';
+  if post.terms
+    if post.terms.post_tag
+      script(type='text/javascript').
+        var tags = !{JSON.stringify(post.terms.post_tag)};
+
+  script(src='/js/codemirror.js')
+  script(src='/js/jquery.min.js')
+  script(src='/js/markdown-editor.js')
+  script(src='/js/editor.js')

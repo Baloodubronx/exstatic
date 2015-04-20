@@ -1,27 +1,33 @@
 var gulp = require('gulp'),
-livereload = require('gulp-livereload'),
-nodemon = require('gulp-nodemon');
+  nodemon = require('gulp-nodemon'),
+  livereload = require('gulp-livereload'),
+  stylus = require('gulp-stylus');
 
-gulp.task('watch',  function() {
-  // start the livereload server
+gulp.task('stylus', function () {
+  gulp.src('./public/css/*.styl')
+    .pipe(stylus())
+    .pipe(gulp.dest('./public/css'))
+    .pipe(livereload());
+});
+
+gulp.task('watch', function() {
+  gulp.watch('./public/css/**/*.styl', ['stylus']);
+});
+
+gulp.task('develop', function () {
   livereload.listen();
-  gulp.watch('server/**/*.jade', ['reload']);
-  gulp.watch('server/**/*.css', ['reload']);
+  nodemon({
+    script: 'app.js',
+    ext: 'js coffee jade',
+  }).on('restart', function () {
+    setTimeout(function () {
+      livereload.changed(__dirname);
+    }, 1000);
+  });
 });
 
-gulp.task('serve', ['watch'], function(){
-  nodemon(
-    {
-      script: 'server/app.js',
-      watch: ['server/**/*.js'],
-    })
-    .on('restart', function () {
-      setTimeout(function() {livereload.changed();}, 1000);
-      console.log('restarted2!');
-    });
-});
-
-gulp.task('reload', function(){
-  gulp.src('server/**/*.*').pipe(livereload());
-  console.log('restarted!');
-});
+gulp.task('default', [
+  'stylus',
+  'develop',
+  'watch'
+]);

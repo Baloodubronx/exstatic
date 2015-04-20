@@ -1,0 +1,3 @@
+- [ ] sitemap generator
+- [ ] include Discus
+- [ ] same cat/tag for a given article
