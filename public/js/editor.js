@@ -16,7 +16,7 @@ $(document).ready(function() {
     post.content = myCodeMirror.getValue();
     $.post(url, {post:post, tags:tags}).done(function(data) {
       console.log(data.post.slug);
-      var redirect = '/post/'+data.post.slug;
+      var redirect = '/app/post/'+data.post.slug;
       $( location ).attr("href", redirect);
     });
     //console.log(myCodeMirror.getValue());

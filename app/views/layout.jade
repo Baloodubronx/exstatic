@@ -10,5 +10,39 @@ html(lang='en')
     block js
       if ENV_DEVELOPMENT
         script(src='http://localhost:35729/livereload.js')
-    body
+
+  body
+    nav.navbar
+      ul
+        li
+          a(href="#")
+            | eX
+        li
+          a(href="/app")
+            | Home
+        li
+          a(href="/app/post")
+            | Posts
+        li
+          a(href="/app/post/new")
+            | New post
+        li
+          a(href="/app/media")
+            | Media
+        li
+          a(href="/app/category")
+            | Categories
+        li
+          a(href="/app/tag")
+            | Tags
+        li
+          a(href="/", target = "_blank")
+            | View site
+        li
+          a(href="/generate")
+            | Generate site
+        li
+          a(href="/settings")
+            | Settings
+      
     block content

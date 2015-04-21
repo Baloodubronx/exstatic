@@ -3,12 +3,22 @@ var express = require('express'),
   mongoose = require('mongoose'),
   Post = mongoose.model('Post'),
   moment = require('moment');
+var generator = require('../functions/generator.js');
 
 module.exports = function (app) {
   app.use('/app/', router);
 };
 
 router.get('/', function (req, res, next) {
+  Post.find().sort({modified:-1}).exec(function (err, posts) {
+    if (err) return next(err);
+    res.render('index', {
+      posts: posts
+    });
+  });
+});
+
+router.get('/post', function (req, res, next) {
   Post.find().sort({modified:-1}).exec(function (err, posts) {
     if (err) return next(err);
     res.render('index', {
@@ -46,5 +56,11 @@ router.get('/post/:slug', function(req, res){
     else {
       res.redirect('/');
     }
+  });
+});
+
+router.get('/generate', function(req, res) {
+  generator.makeAllSite(function(status){
+    res.render('generate', {status:status});
   });
 });

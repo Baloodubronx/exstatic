@@ -2,17 +2,17 @@ var express = require('express'),
   router = express.Router(),
   mongoose = require('mongoose'),
   Post = mongoose.model('Post'),
-  moment = require('moment');
+  generator = require('../functions/generator');
 
 module.exports = function (app) {
   app.use('/preview', router);
 };
 
-router.get('/', function (req, res, next) {
-  Post.find().sort({modified:-1}).exec(function (err, posts) {
-    if (err) return next(err);
-    res.render('index', {
-      posts: posts
+router.get('/:postID', function (req, res) {
+  Post.findById(req.params.postID, function(err, post) {
+    if (err) console.log('err: ' + err);
+    generator.previewFromPost(post, function(url){
+      res.redirect('/temp/'+url);
     });
   });
 });

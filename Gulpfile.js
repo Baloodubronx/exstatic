@@ -1,7 +1,8 @@
 var gulp = require('gulp'),
   nodemon = require('gulp-nodemon'),
   livereload = require('gulp-livereload'),
-  stylus = require('gulp-stylus');
+  stylus = require('gulp-stylus'),
+  concat = require('gulp-concat');
 
 gulp.task('stylus', function () {
   gulp.src('./public/css/*.styl')
@@ -12,6 +13,16 @@ gulp.task('stylus', function () {
 
 gulp.task('watch', function() {
   gulp.watch('./public/css/**/*.styl', ['stylus']);
+  gulp.watch('./theme/stylus/**/*.styl', ['theme-stylus']);
+});
+
+gulp.task('theme-stylus', function(){
+  gulp.src('./theme/stylus/**/*.styl')
+  .pipe(stylus())
+  .pipe(concat('style.css'))
+  .pipe(gulp.dest('./theme'))
+  .pipe(gulp.dest('./site/temp'))
+  .pipe(livereload());
 });
 
 gulp.task('develop', function () {
@@ -28,6 +39,7 @@ gulp.task('develop', function () {
 
 gulp.task('default', [
   'stylus',
+  'theme-stylus',
   'develop',
   'watch'
 ]);

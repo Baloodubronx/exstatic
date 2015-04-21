@@ -123,18 +123,53 @@ table {
 }
 body {
   padding: 0px;
-  font: 15px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin-top: 30px;
+}
+a {
+  color: #e87e04;
+  text-decoration: none;
+}
+a:hover {
+  color: #5d3202;
+}
+.navbar {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background: #111;
+}
+.navbar ul {
+  list-style: none;
+}
+.navbar ul li {
+  display: inline-block;
+}
+.navbar ul li a {
+  display: block;
+  line-height: 30px;
+  padding: 0 10px;
+  color: #fff;
+  font-size: 13px;
+  text-decoration: none;
+}
+.navbar ul li a:hover {
+  background: #fff;
+  color: #111;
 }
 .editzone {
   position: absolute;
-  top: 0;
+  top: 30px;
   bottom: 0;
   left: 27%;
   right: 10%;
 }
 .sidebar {
   position: absolute;
-  top: 0;
+  top: 30px;
   left: 0;
   bottom: 0;
   width: 25%;
@@ -178,16 +213,17 @@ body {
   height: auto;
   padding: 10px 5px;
   border: 1px solid #aaa;
+  font-size: 16px;
 }
 .CodeMirror .cm-header {
   color: #111;
 }
 .CodeMirror .cm-header-3 {
-  font-size: 16px;
-}
-.CodeMirror .cm-header-2 {
   font-size: 18px;
 }
-.CodeMirror .cm-header-1 {
+.CodeMirror .cm-header-2 {
   font-size: 20px;
+}
+.CodeMirror .cm-header-1 {
+  font-size: 22px;
 }

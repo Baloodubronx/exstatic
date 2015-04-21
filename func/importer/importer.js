@@ -5,7 +5,7 @@ var marked = require('marked');
 var fs = require('fs');
 var path = require('path');
 var mkdirp = require('mkdirp');
-var Post = require('../models/post.model');
+var Post = require('../../app/models/post.model');
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/exstatic');
 
@@ -26,7 +26,7 @@ function getPosts(url, page) {
       console.log('retreiving page '+page);
       processPosts(json);
       if (json.length) {
-        getPosts(url, ++page);
+        //getPosts(url, ++page);
       }
 		});
 	});
