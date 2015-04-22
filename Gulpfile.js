@@ -21,7 +21,7 @@ gulp.task('theme-stylus', function(){
   .pipe(stylus())
   .pipe(concat('style.css'))
   .pipe(gulp.dest('./theme'))
-  .pipe(gulp.dest('./site/temp'))
+  .pipe(gulp.dest('./site'))
   .pipe(livereload());
 });
 

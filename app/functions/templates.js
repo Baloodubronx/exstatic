@@ -38,7 +38,8 @@ exports.prepareTemplate = function(templateFile, cats, tags) {
   // replace categories
   var temp = '<ul class="cat-list">';
   cats.forEach(function(cat) {
-    temp += '<li class="cat-list-item">' + cat.name +'</li>';
+    temp += '<li class="cat-list-item">';
+    temp += '<a href="/'+cat.slug+'">' + cat.name +'</a></li>';
   });
   temp += '</ul>';
   template = template.replace(/\{\{categories\}\}/gm, temp);

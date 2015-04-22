@@ -12,61 +12,46 @@ var _ = require('lodash');
 var xTemplate = require('./templates');
 var xTerms = require('./terms');
 
-exports.previewFromPost = function(post, calibaqui) {
-  // GET TEMPLATE PATH
-  var templatesDir = path.normalize(rootPath + '/theme/templates/');
-  var templateFiles = [];
-  // GET TEMPLATE FILES
-  var templateGlob = glob.sync(templatesDir+'*.html');
-  templateGlob.forEach(function (file) {
-    templateFiles[file] = fs.readFileSync(file, {encoding:'utf8'});
+
+function xSet(template, reg, rep) {
+  var temp = new RegExp(reg, "gm");
+  return template.replace(temp, rep);
+}
+
+function xSetMulti(template, inserts) {
+  var temp = template;
+  for (var key in inserts) {
+    temp = xSet(temp, '{{'+key+'}}', inserts[key]);
+  }
+
+  return temp;
+}
+
+function writefile(dir, filename, template, cb) {
+  mkdirp(dir, function(){
+    fs.writeFileSync(dir+filename, template);
+    cb();
   });
-
-  var articleTemplate = fs.readFileSync(templatesDir+'article.html', {encoding:'utf8'});
-  var final = articleTemplate;
-
-  // INSERT ANY FILE
-  final = final.replace(/\{\{file: ([^\s]+)\}\}/gm,
-    function(x,y){
-      return templateFiles[templatesDir+y];
-    }
-  );
-
-  // INSERT syle file
-  final = final.replace(/\{\{style-file\}\}/gm, 'style.css');
-  // INSERT page title
-  final = final.replace(/\{\{post-title\}\}/g, post.title);
-  // INSERT content
-  final = final.replace(/\{\{post-content\}\}/g, marked(post.content));
-  async.waterfall([
-    // STEP 1: get categories
-    function(cb) {
-      xTerms.getCatsAndTags(cb);
-    },
-
-    // STEP 2: replace categories
-    function(cats, tags, cb) {
-      var temp = '<ul class="cat-list">';
-      cats.forEach(function(cat) {
-        temp += '<li class="cat-list-item">' + cat.name +'</li>';
-      });
-      temp += '</ul>';
-      final = final.replace(/\{\{categories\}\}/gm, temp);
-      cb(null);
-    },
-
-    // STEP 3:
+}
 
 
-  ],
-    // Final callback
-    function(err){
-      if (err) console.log(err);
-      console.log(post);
-      fs.writeFileSync('site/temp/'+post.slug+'.html', final);
-      fs.createReadStream(rootPath+'/theme/style.css').pipe(fs.createWriteStream('public/temp/style.css'));
-      calibaqui(post.slug+'.html');
+exports.previewFromPost = function(post, callback) {
+
+  xTerms.getCatsAndTags(function(err, cats, tags){
+    var final = xTemplate.prepareTemplate('article.html', cats, tags);
+
+    var inserts = {
+      'post-title':post.title,
+      'post-content': marked(post.content),
+      'page-title' : 'Preview - ' + post.title
+    };
+
+    final = xSetMulti(final, inserts);
+
+    writefile('site/temp/', post.slug+'.html', final, function() {
+      callback(post.slug+'.html');
     });
+  });
 
 };
 
@@ -110,6 +95,7 @@ function makeHomePage(cats, tags, callback) {
       lastArt += '<a href="' + post.terms.category[0].slug + '/' + post.slug + '.html">';
       lastArt += post.title;
       lastArt += '</a></p>';
+      lastArt += '<p>' + post.excerpt + '</p>';
     });
 
     template = xSet(template, '{{last-articles}}', lastArt);
@@ -121,17 +107,7 @@ function makeHomePage(cats, tags, callback) {
   });
 }
 
-function xSet(template, reg, rep) {
-  var temp = new RegExp(reg, "gm");
-  return template.replace(temp, rep);
-}
 
-function writefile(dir, filename, template, cb) {
-  mkdirp(dir, function(){
-    fs.writeFileSync(dir+filename, template);
-    cb();
-  });
-}
 
 
 function makeCategories(cats, tags, callback) {
@@ -149,7 +125,7 @@ function makePosts(cats, tags, callback) {
     async.each(
       posts,
       function(post, cb){
-        generateFile(post, cats, tags, cb);
+        generatePostFile(post, cats, tags, cb);
       },
       function(err) {
         if (err) console.log(err);
@@ -160,43 +136,28 @@ function makePosts(cats, tags, callback) {
 }
 
 
-function generateFile(post, cats, tags, calibacky) {
-  // GET TEMPLATE PATH
-  var templatesDir = path.normalize(rootPath + '/theme/templates/');
-  var templateFiles = [];
-  // GET TEMPLATE FILES
-  var templateGlob = glob.sync(templatesDir+'*.html');
-  templateGlob.forEach(function (file) {
-    templateFiles[file] = fs.readFileSync(file, {encoding:'utf8'});
+function generatePostFile(post, cats, tags, callback) {
+  var final = xTemplate.prepareTemplate('article.html', cats, tags);
+  var postTags = '';
+
+  // replace tags
+  postTags = '<ul class="tag-list">';
+  post.terms.post_tag.forEach(function(tag) {
+    postTags += '<li class="tag-list-item">' + tag.name +'</li>';
   });
+  postTags += '</ul>';
 
-  var articleTemplate = fs.readFileSync(templatesDir+'article.html', {encoding:'utf8'});
-  var final = articleTemplate;
+  var inserts = {
+    'post-title' : post.title,
+    'post-content' : marked(post.content),
+    'page-title' : post.title,
+    'post-tags' : postTags
+  };
 
-  // INSERT ANY FILE
-  final = final.replace(/\{\{file: ([^\s]+)\}\}/gm,
-    function(x,y){
-      return templateFiles[templatesDir+y];
-    }
-  );
-  // INSERT syle file
-  final = final.replace(/\{\{style-file\}\}/gm, 'style.css');
-  // INSERT page title
-  final = final.replace(/\{\{post-title\}\}/g, post.title);
-  // INSERT content
-  final = final.replace(/\{\{post-content\}\}/g, marked(post.content));
-
-  // Replace categories
-  var temp = '<ul class="cat-list">';
-  cats.forEach(function(cat) {
-    temp += '<li class="cat-list-item">' + cat.name +'</li>';
-  });
-  temp += '</ul>';
-  final = final.replace(/\{\{categories\}\}/gm, temp);
+  final = xSetMulti(final, inserts);
 
   var dir = 'site/'+post.terms.category[0].slug+'/';
-  mkdirp(dir, function(){
-    fs.writeFileSync(dir+post.slug+'.html', final);
-    calibacky(null);
+  writefile(dir, post.slug+'.html', final, function() {
+    callback(null);
   });
 }
